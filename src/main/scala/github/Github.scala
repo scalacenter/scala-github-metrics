@@ -15,7 +15,6 @@ import org.joda.time.DateTime
 import scala.concurrent.Future
 
 object Github {
-  case class Foo(v: String)
   case class CommitHistory(commit: Commit)
   case class Commit(author: CommitAuthor)
   case class CommitAuthor(name: String, email: String, date: DateTime)
@@ -29,8 +28,8 @@ class Github(token: Option[String])(implicit system: ActorSystem, materializer: 
 
   private val poolClientFlow = Http().cachedHostConnectionPoolHttps[HttpRequest]("api.github.com")
   
-  def fetchUserRepos(owner: String, repo: String): Future[List[Github.Foo]] = {
-    paginated[Github.Foo](Path.Empty / "repos" / owner / repo / "commits")
+  def fetchUserRepos(owner: String, repo: String): Future[List[Github.CommitHistory]] = {
+    paginated[Github.CommitHistory](Path.Empty / "repos" / owner / repo / "commits")
   }
 
   def paginated[T](path: Path)(implicit ev: Unmarshaller[HttpResponse, List[T]]): Future[List[T]] = {
