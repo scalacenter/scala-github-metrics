@@ -11,7 +11,9 @@ lazy val akkaHttpVersion = "10.0.3"
 libraryDependencies ++= Seq(
   "com.github.nscala-time" %% "nscala-time" % "2.14.0",
   "org.json4s" %% "json4s-native" % "3.4.2",
-  "com.typesafe.akka" %% "akka-http" % akkaHttpVersion
+  "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
+  "com.github.wookietreiber" %% "scala-chart" % "latest.integration",
+  "org.jfree" % "jfreesvg" % "3.0"
 )
 
 scalacOptions := Seq(
